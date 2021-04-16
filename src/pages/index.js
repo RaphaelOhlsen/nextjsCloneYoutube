@@ -1,4 +1,6 @@
 import React from 'react';
+import getVideos from 'src/database/getVideos';
+
 import { Box, Grid } from '@material-ui/core';
 
 import Layout from 'src/components/Layout';
@@ -21,56 +23,8 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const data = [
-    {
-      id: 1,
-      title:
-        'NEXT.JS ENTENDENDO A RENDERIZAÇÃO REACT NO LADO SERVIDOR [PARTE #01]',
-      authorId: 1,
-      authorName: 'Lucas Mhini',
-      authorAvatar: 'avatarUrl',
-      views: 10,
-      thumb: '/thumbs/next01.png',
-      videoUrl: 'url',
-      updatedAt: new Date(),
-    },
-    {
-      id: 2,
-      title:
-        'NEXT.JS ENTENDENDO A RENDERIZAÇÃO REACT NO LADO SERVIDOR [PARTE #02]',
-      authorId: 1,
-      authorName: 'Lucas Mhini',
-      authorAvatar: 'avatarUrl',
-      views: 10,
-      thumb: '/thumbs/next02.png',
-      videoUrl: 'url',
-      updatedAt: new Date(),
-    },
-    {
-      id: 3,
-      title:
-        'NEXT.JS ENTENDENDO A RENDERIZAÇÃO REACT NO LADO SERVIDOR [PARTE #03]',
-      authorId: 1,
-      authorName: 'Lucas Mhini',
-      authorAvatar: 'avatarUrl',
-      views: 10,
-      thumb: '/thumbs/next03.png',
-      videoUrl: 'url',
-      updatedAt: new Date(),
-    },
-    {
-      id: 4,
-      title:
-        'NEXT.JS ENTENDENDO A RENDERIZAÇÃO REACT NO LADO SERVIDOR [PARTE #03]',
-      authorId: 1,
-      authorName: 'Lucas Mhini',
-      authorAvatar: 'avatarUrl',
-      views: 10,
-      thumb: '/thumbs/next03.png',
-      videoUrl: 'url',
-      updatedAt: new Date(),
-    },
-  ];
+  const data = await getVideos();
+
   return {
     props: {
       data: JSON.parse(JSON.stringify(data)),

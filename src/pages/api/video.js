@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ObjectId } from 'mongodb';
 import nc from 'next-connect';
 import connectToDatabase from 'src/utils/mongodb';
@@ -9,12 +10,10 @@ const handler = nc()
     const { title, authorId, authorName, authorAvatar, videoUrl } = req.body;
     const { db } = await connectToDatabase();
     const collection = db.collection('videos');
-    console.log('REQ.BODY: ', req.body);
-    console.log(req.file.location);
 
     await collection.insertOne({
       title,
-      // authorId: ObjectId(authorId),
+      authorId: ObjectId(authorId),
       authorName,
       authorAvatar,
       views: 0,

@@ -22,7 +22,7 @@ export default function VideoCard({ item }) {
     <Box>
       <img alt={item.title} src={item.thumb} style={{ width: '100%' }} />
       <Box display="flex" mt={1}>
-        <Box mr={1}>
+        <Box mr={2}>
           <Avatar alt={item.authorName} src={item.authorAvatar}>
             SS
           </Avatar>
