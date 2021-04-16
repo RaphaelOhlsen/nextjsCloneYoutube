@@ -5,6 +5,7 @@ import { Box, Grid } from '@material-ui/core';
 
 import Layout from 'src/components/Layout';
 import VideoCard from 'src/components/VideoCard';
+import { getSession } from 'next-auth/client';
 
 export default function Home({ data }) {
   return (
