@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { createContext, useEffect, useState } from 'react';
 import THEMES from 'src/utils/constants';
 
