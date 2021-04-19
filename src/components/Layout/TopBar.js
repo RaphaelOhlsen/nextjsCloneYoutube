@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { signIn, signOut, useSession } from 'next-auth/client';
+import useSettings from 'src/hooks/useSettings';
 
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,6 +19,10 @@ import Apps from '@material-ui/icons/Apps';
 import VideoCall from '@material-ui/icons/VideoCall';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreVert from '@material-ui/icons/MoreVert';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+
+import THEMES from 'src/utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TopBar() {
   const classes = useStyles();
   const [session] = useSession();
+  const { settings, saveSettings } = useSettings();
 
   return (
     <AppBar className={classes.root} color="default">
@@ -58,8 +64,12 @@ export default function TopBar() {
         <Box display="flex" alignItems="center">
           <MenuIcon />
           <img
-            src="/youtube-logo.svg"
-            alt="Youtube Logo"
+            src={
+              settings.theme === THEMES.DARK
+                ? '/branco.png'
+                : '/youtube-logo.svg'
+            }
+            alt="logo Youtube"
             className={classes.logo}
           />
         </Box>
@@ -79,6 +89,17 @@ export default function TopBar() {
         </Hidden>
 
         <Box display="flex">
+          <IconButton className={classes.icons}>
+            {settings.theme === THEMES.DARK ? (
+              <Brightness7Icon
+                onClick={() => saveSettings({ theme: THEMES.LIGHT })}
+              />
+            ) : (
+              <Brightness4Icon
+                onClick={() => saveSettings({ theme: THEMES.DARK })}
+              />
+            )}
+          </IconButton>
           <IconButton className={classes.icons}>
             <VideoCall />
           </IconButton>
