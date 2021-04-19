@@ -6,10 +6,15 @@ import { Box, Typography, Avatar, makeStyles } from '@material-ui/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 dayjs.extend(relativeTime);
 
 const useStyles = makeStyles(() => ({
+  img: {
+    width: '100%',
+    cursor: 'pointer',
+  },
   caption: {
     fontWeight: 500,
     display: '-webkit-box',
@@ -25,10 +30,13 @@ export default function VideoCard({ item }) {
 
   return (
     <Box>
-      <img
+      <Image
+        width={500}
+        height={300}
         alt={item.title}
         src={item.thumb}
-        style={{ width: '100%', cursor: 'pointer' }}
+        className={classes.img}
+        layout="intrinsic"
         onClick={() =>
           router.push({
             pathname: '/video/[id]',
@@ -44,7 +52,7 @@ export default function VideoCard({ item }) {
         </Box>
         <Box>
           <Typography
-            className={classes.capion}
+            className={classes.caption}
             gutterBottom
             variant="body1"
             color="textPrimary"
