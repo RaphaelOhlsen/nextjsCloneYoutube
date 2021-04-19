@@ -5,7 +5,28 @@ import { CacheProvider } from '@emotion/react';
 import { Provider } from 'next-auth/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createCache from '@emotion/cache';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { Router } from 'next/dist/client/router';
 import theme from '../theme';
+
+NProgress.configure({
+  showSpinner: false,
+  trickleRate: 0.1,
+  trickleSpeed: 300,
+});
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done();
+});
 
 export const cache = createCache({ key: 'css', prepend: true });
 
@@ -33,6 +54,18 @@ export default function MyApp(props) {
           <Component {...pageProps} />
         </ThemeProvider>
       </Provider>
+      <style global jsx>
+        {`
+          #nprogress {
+            position: relative;
+            z-index: 9999999;
+          }
+          #nprogress .bar {
+            background: #f44336 !important;
+            height: 3px;
+          }
+        `}
+      </style>
     </CacheProvider>
   );
 }

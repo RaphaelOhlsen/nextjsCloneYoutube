@@ -77,6 +77,7 @@ export default function NavaBar() {
   ]);
 
   const isSelected = (item) => router.pathname === item.path;
+
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <List>
@@ -84,7 +85,7 @@ export default function NavaBar() {
           const Icon = item.icon;
           return (
             <ListItem
-              key={item.id}
+              key={`primary_${item.id}`}
               button
               classes={{ root: classes.listItem }}
               selected={isSelected(item)}
@@ -106,7 +107,7 @@ export default function NavaBar() {
           const Icon = item.icon;
           return (
             <ListItem
-              key={item.id}
+              key={`secondary_${item.id}`}
               button
               classes={{ root: classes.listItem }}
               selected={isSelected(item)}
@@ -149,7 +150,7 @@ export default function NavaBar() {
         >
           {subscriptions.map((item) => (
             <ListItem
-              key={item.id}
+              key={`subs_${item.id}`}
               button
               classes={{ root: classes.listItem }}
               selected={isSelected(item)}

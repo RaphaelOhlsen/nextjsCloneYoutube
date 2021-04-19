@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import getVideos from 'src/database/getVideos';
 
@@ -5,7 +6,6 @@ import { Box, Grid } from '@material-ui/core';
 
 import Layout from 'src/components/Layout';
 import VideoCard from 'src/components/VideoCard';
-import { getSession } from 'next-auth/client';
 
 export default function Home({ data }) {
   return (
@@ -13,7 +13,7 @@ export default function Home({ data }) {
       <Box p={2}>
         <Grid container spacing={4}>
           {data.map((item) => (
-            <Grid key={item.id} item xl={3} lg={3} md={4} sm={6} xs={12}>
+            <Grid key={item._id} item xl={3} lg={3} md={4} sm={6} xs={12}>
               <VideoCard item={item} />
             </Grid>
           ))}
@@ -30,5 +30,6 @@ export async function getStaticProps() {
     props: {
       data: JSON.parse(JSON.stringify(data)),
     },
+    revalidate: 15,
   };
 }
